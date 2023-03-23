@@ -1,21 +1,29 @@
-{% extends "index.html" %}
+{% extends 'index.html' %}
 {% block content %}
     <div class="column">
         <div class="block">
             <h1 class="title is-1">{{ profile.user.username|upper }}'s Thoughts</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="buttons has-addons">
+                    {% if profile in user.profile.follows.all %}
+                        <button class="button is-info is-static">Follow</button>
+                        <button class="button is-danger" name="follow" value="unfollow">Unfollow</button>
+                    {% else %}
+                        <button class="button is-info" name="follow" value="follow">Follow</button>
+                        <button class="button is-danger is-static">Unfollow</button>
+                    {% endif %}
+                </div>
+            </form>
         </div>
-    <form method="post">
-        {% csrf_token %}    
-        <div class="buttons has-addons">
-            {% if profile in user.profile.follows.all %}
-                <button class="button is-info is-static">Follow</button>
-                <button class="button is-danger" name="follow" value="unfollow">Unfollow</button>
-            {% else %}
-                <button class="button is-info" name="follow" value="follow">Follow</button>
-                <button class="button is-danger is-static">Unfollow</button>
-            {% endif %}
+        <div class="content">
+            {% for thoughts in profile.user.thoughts.all %}
+                <div class="box">
+                    {{ thoughts.body }}
+                    <span class="is-small has-text-grey-light">({{ thoughts.created_at }})</span>
+                </div>
+            {% endfor %}
         </div>
-    </form>
     </div>
     <div class="column is-one-third">
         <div class="block">
@@ -29,7 +37,7 @@
                 <ul>
                     {% for following in profile.follows.all %}
                         <li>
-                            <a href="#">{{ following }}</a>
+                            <a href="{% url 'thoughts:profile' following.id %} ">{{ following }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -41,7 +49,7 @@
                 <ul>
                     {% for follower in profile.followed_by.all %}
                         <li>
-                            <a href="#">{{ follower }}</a>
+                            <a href="{% url 'thoughts:profile' follower.id %} ">{{ follower }}</a>
                         </li>
                     {% endfor %}
                 </ul>
