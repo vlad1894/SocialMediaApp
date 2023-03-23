@@ -4,6 +4,18 @@
         <div class="block">
             <h1 class="title is-1">{{ profile.user.username|upper }}'s Thoughts</h1>
         </div>
+    <form method="post">
+        {% csrf_token %}    
+        <div class="buttons has-addons">
+            {% if profile in user.profile.follows.all %}
+                <button class="button is-info is-static">Follow</button>
+                <button class="button is-danger" name="follow" value="unfollow">Unfollow</button>
+            {% else %}
+                <button class="button is-info" name="follow" value="follow">Follow</button>
+                <button class="button is-danger is-static">Unfollow</button>
+            {% endif %}
+        </div>
+    </form>
     </div>
     <div class="column is-one-third">
         <div class="block">
