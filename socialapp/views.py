@@ -1,9 +1,10 @@
 from django.shortcuts import render
-
+from .forms import ThoughtForm
 from .models import Profile
 
 def dashboard(request):
-    return render(request, 'socialapp/dashboard.html')
+    form=ThoughtForm()
+    return render(request, 'socialapp/dashboard.html', {"form": form})
 
 
 def list_of_profiles(request):
