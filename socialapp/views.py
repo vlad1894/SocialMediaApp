@@ -1,8 +1,9 @@
 from django.shortcuts import render
+
 from .models import Profile
 
 def dashboard(request):
-    return render(request, 'index.html')
+    return render(request, 'socialapp/dashboard.html')
 
 
 def list_of_profiles(request):

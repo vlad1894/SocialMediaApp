@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="column">
+        {% for followed in user.profile.follows.all %}
+            {% for thoughts in followed.user.thoughts.all %}
+                <div class="box">
+                    {{ thoughts.body }}
+                    <span class="is-small has-text-grey-light">({{ thoughts.created_at }} by {{ thoughts.user.username }})</span>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock content %}
