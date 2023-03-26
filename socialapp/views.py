@@ -1,10 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ThoughtForm
-from .models import Profile
+from .models import Thought, Profile
 
 def dashboard(request):
+    if request.method == "POST":
+        form = ThoughtForm(request.POST or None)
+        if form.is_valid():
+            thoughts = form.save(commit=False)
+            thoughts.user = request.user
+            thoughts.save()
+            return redirect("socialapp:dashboard")
     form=ThoughtForm()
     return render(request, 'socialapp/dashboard.html', {"form": form})
+
 
 
 def list_of_profiles(request):

@@ -25,19 +25,25 @@
             {% endfor %}
         </div>
     </div>
-    <div class="column is-one-third">
+    <div class="column is-one-fluid">
         <div class="block">
-            <a href="{% url 'thoughts:list_of_profiles' %}">
+            <a href="{% url 'socialapp:list_of_profiles' %}">
                 <button class="button is-dark is-outlined is-fullwidth">All Profiles</button>
             </a>
         </div>
+        <div class="column is-one-fullwidth">
+            <div class="block">
+                <a href="{% url 'socialapp:dashboard' %}">
+                    <button class="button is-dark is-outlined is-fullwidth">Dashboard</button>
+                </a>
+            </div>
         <div class="block">
             <h3 class="title is-4">{{ profile.user.username }} follows:</h3>
             <div class="content">
                 <ul>
                     {% for following in profile.follows.all %}
                         <li>
-                            <a href="{% url 'thoughts:profile' following.id %} ">{{ following }}</a>
+                            <a href="{% url 'socialapp:profile' following.id %} ">{{ following }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -49,7 +55,7 @@
                 <ul>
                     {% for follower in profile.followed_by.all %}
                         <li>
-                            <a href="{% url 'thoughts:profile' follower.id %} ">{{ follower }}</a>
+                            <a href="{% url 'socialapp:profile' follower.id %} ">{{ follower }}</a>
                         </li>
                     {% endfor %}
                 </ul>
