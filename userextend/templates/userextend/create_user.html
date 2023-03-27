@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block title %}
+    Create User
+{% endblock title %}
+{% block content %}
+    <div class="column">
+        <div class="block">
+            <h3 class="title is-3">
+                Create a new user
+                <h3 class="text-center">Create a new user</h3>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="button is-info is-fullwidh is-normal mt-5" type="submit">Save</button>
+            {% endblock content %}

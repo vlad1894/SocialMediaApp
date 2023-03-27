@@ -10,36 +10,31 @@
             {% endfor %}
         {% endfor %}
     </div>
-
-<div class="column is-one-third">
-
-    <div class="block">
-        <a href="{% url 'socialapp:list_of_profiles' %} ">
-            <button class="button is-dark is-outlined is-fullwidth">
-                Following
-            </button>
-        </a>
-    </div>
-
-    <div class="block">
-        <a href="{% url 'socialapp:profile' request.user.profile.id %} ">
-            <button class="button is-info is-light is-outlined is-fullwidth">
-                My Profile
-            </button>
-        </a>
-    </div>
-
-    <div class="block">
+    <div class="column is-one-third">
         <div class="block">
-            <h2 class="title is-2">Add a Thought</p>
+            <a href="{% url "create_user" %}">Sign-Up</a>
         </div>
         <div class="block">
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="button is-info is-fullwidh is-normal mt-5"
-                type="submit">Share</button>
-</div>    
-
+            <a href="{% url 'socialapp:list_of_profiles' %} ">
+                <button class="button is-dark is-outlined is-fullwidth">Following</button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="{% url 'socialapp:profile' request.user.profile.id %} ">
+                <button class="button is-info is-light is-outlined is-fullwidth">My Profile</button>
+            </a>
+        </div>
+        <div class="block">
+            <div class="block">
+                <h2 class="title is-2">Add a Thought</h2>
+            </div>
+            <div class="block">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="button is-info is-fullwidh is-normal mt-5" type="submit">Share your thought</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

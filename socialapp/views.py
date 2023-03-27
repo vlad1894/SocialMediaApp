@@ -37,4 +37,6 @@ def profile(request, pk):
         current_user_profile.save()
     return render(request, 'socialapp/profile.html', {'profile': profile})
 
+
+
 # Create your views here.
