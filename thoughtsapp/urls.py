@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views
+from userextend.forms import AuthenticationNewForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('socialapp.urls')),
-    path('', include('userextend.urls'))
+    path('', include('userextend.urls')),
+    path('', include("django.contrib.auth.urls")),
+    path('login/', views.LoginView.as_view(form_class=AuthenticationNewForm), name="login")
     
 ]

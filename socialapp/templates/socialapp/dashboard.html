@@ -10,47 +10,62 @@
             {% endfor %}
         {% endfor %}
     </div>
-    <div class="column is-one-third">
-        <div class="block">
-            <a href="{% url "create_user" %}">Sign-Up</a>
+    {% if user.is_authenticated %}
+    {% else %}
+        <div class="container">
+            <div class="field">
+                <form action='{% url "create_user" %}'>
+                    <button class="button is-dark is-outlined is-fullwidth">Sign-Up</button>
+                </form>
+            </div>
+            <div class="field">
+                <form action='{% url "login" %}'>
+                    <button class="button is-dark is-outlined is-fullwidth">Login</button>
+                </form>
+            </div>
         </div>
-        {% comment %} <div class="block">
-            <a href="{% url "login" %}">Login</a>
-        </div> {% endcomment %}
+    {% endif %}
+    {% if user.is_authenticated %}
         <div class="block">
-            {% if user.is_authenticated %}
+            <form action='{% url "logout" %}'>
+                <button class="button is-dark is-outlined is-fullwidth is-normal ">Logout</button>
+            </form>
+        </div>
+    {% else %}
+        <a href="{% url 'socialapp:dashboard' %} "/>
+    {% endif %}
+    <div class="block">
+        {% if user.is_authenticated %}
             <a href="{% url 'socialapp:list_of_profiles' %} ">
-                <button class="button is-dark is-outlined is-fullwidth">Following</button>
+                <button class="button is-dark is-outlined is-fullwidth is-normal ">Following</button>
             </a>
-            {% else %}
-            <a href="{% url "create_user" %}"></a>
-            {% endif %}
-        </div>
+        {% else %}
+            <a href="{% url "login" %}"></a>
+        {% endif %}
+    </div>
+    <div class="block">
+        {% if user.is_authenticated %}
+            <a href="{% url 'socialapp:profile' request.user.profile.id %} ">
+                <button class="button is-info is-light is-outlined is-right">My Profile</button>
+            </a>
+        {% else %}
+        {% endif %}
+    </div>
+    <div class="block">
         <div class="block">
             {% if user.is_authenticated %}
-            <a href="{% url 'socialapp:profile' request.user.profile.id %} ">
-                <button class="button is-info is-light is-outlined is-fullwidth">My Profile</button>
-            </a>
-            {% else %}
-            <a href="{% url "create_user" %}"></a>
-            {% endif %}
-        </div>
-        <div class="block">
-            <div class="block">
-                {% if user.is_authenticated %}
-                <h2 class="title is-2">Add a Thought</h2>
+                <h2 class="title is-3 is-normal mt-6">Add a Thought</h2>
             </div>
             <div class="block">
-                
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button class="button is-info is-fullwidh is-normal mt-5" type="submit">Share your thought</button>
                 </form>
-                {% else %}
-                <a href="{% url "create_user" %}"></a>
-                {% endif %}
-            </div>
+            {% else %}
+            {% endif %}
         </div>
     </div>
+</div>
+</div>
 {% endblock content %}
