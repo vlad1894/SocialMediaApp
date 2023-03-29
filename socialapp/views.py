@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from .forms import ThoughtForm
 from .models import Thought, Profile
+from django.http import HttpResponseRedirect
 
 def dashboard(request):
     if request.method == "POST":
@@ -10,6 +11,14 @@ def dashboard(request):
             thoughts.user = request.user
             thoughts.save()
             return redirect("socialapp:dashboard")
+        
+    # followed_thought = Thought.objects.filter(
+    #     user_profile_in=request.user.profile.follows.all()
+    # ).order_by("-created_at")
+
+    # return render(request, 'socialapp/dashboard.html', {"form": form, "thoughts": followed_thought})
+
+
     form=ThoughtForm()
     return render(request, 'socialapp/dashboard.html', {"form": form})
 
@@ -36,6 +45,13 @@ def profile(request, pk):
             current_user_profile.follows.remove(profile)
         current_user_profile.save()
     return render(request, 'socialapp/profile.html', {'profile': profile})
+
+
+def like_view(request, pk):
+    post = get_object_or_404(Thought, id=request.POST.get('user'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('dashboard', args=[str(pk)]))
+
 
 
 

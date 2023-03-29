@@ -1,71 +1,84 @@
 {% extends "index.html" %}
 {% block content %}
-    <div class="column">
-        {% for followed in user.profile.follows.all %}
-            {% for thoughts in followed.user.thoughts.all %}
-                <div class="box">
-                    {{ thoughts.body }}
-                    <span class="is-small has-text-grey-light">({{ thoughts.created_at }} by {{ thoughts.user.username }})</span>
-                </div>
-            {% endfor %}
-        {% endfor %}
+<div class="column">
+    {% for followed in user.profile.follows.all %}
+    {% for thoughts in followed.user.thoughts.all %}
+    <div class="box">
+        {{ thoughts.body }}
+        <span class="is-small has-text-grey-light">({{ thoughts.created_at }} by {{ thoughts.user.username }})</span>
     </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+{% if user.is_authenticated %}
+{% else %}
+<div class="field is-grouped" style="margin-left: 520px;
+position: absolute;
+top: 50%;
+-ms-transform: translateY(50%);
+transform: translateY(50%)">
+    <div class="control">
+        <form action='{% url "create_user" %}'>
+            <button class="button is-info  is-outlined is-large">Sign-Up</button>
+        </form>
+    </div>
+    <div class="control">
+        <form action='{% url "login" %}'>
+            <button class="button is-info is-outlined is-large">Login</button>
+        </form>
+    </div>
+</div>
+
+{% endif %}
+<div class="block">
     {% if user.is_authenticated %}
-    {% else %}
-        <div class="container">
-            <div class="field">
-                <form action='{% url "create_user" %}'>
-                    <button class="button is-dark is-outlined is-fullwidth">Sign-Up</button>
-                </form>
-            </div>
-            <div class="field">
-                <form action='{% url "login" %}'>
-                    <button class="button is-dark is-outlined is-fullwidth">Login</button>
-                </form>
-            </div>
-        </div>
-    {% endif %}
-    {% if user.is_authenticated %}
+    <div class="field is-grouped" style="margin-top:27px">
+        <p class="control">
         <div class="block">
             <form action='{% url "logout" %}'>
                 <button class="button is-dark is-outlined is-fullwidth is-normal ">Logout</button>
             </form>
         </div>
-    {% else %}
-        <a href="{% url 'socialapp:dashboard' %} "/>
-    {% endif %}
-    <div class="block">
-        {% if user.is_authenticated %}
-            <a href="{% url 'socialapp:list_of_profiles' %} ">
-                <button class="button is-dark is-outlined is-fullwidth is-normal ">Following</button>
-            </a>
         {% else %}
-            <a href="{% url "login" %}"></a>
+        <a href="{% url 'socialapp:dashboard' %} "></a>
         {% endif %}
-    </div>
-    <div class="block">
-        {% if user.is_authenticated %}
+        </p>
+        <p class="control">
+        <div class="block">
+            {% if user.is_authenticated %}
+            <a href="{% url 'socialapp:list_of_profiles' %} ">
+                <button class="button is-info is-outlined is-fullwidth is-normal ">Following</button>
+            </a>
+            {% else %}
+            <a href="{% url 'login' %}"></a>
+            {% endif %}
+        </div>
+        </p>
+        <p class="control">
+        <div class="block">
+            {% if user.is_authenticated %}
             <a href="{% url 'socialapp:profile' request.user.profile.id %} ">
                 <button class="button is-info is-light is-outlined is-right">My Profile</button>
             </a>
-        {% else %}
-        {% endif %}
-    </div>
-    <div class="block">
-        <div class="block">
-            {% if user.is_authenticated %}
-                <h2 class="title is-3 is-normal mt-6">Add a Thought</h2>
-            </div>
-            <div class="block">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="button is-info is-fullwidh is-normal mt-5" type="submit">Share your thought</button>
-                </form>
             {% else %}
             {% endif %}
         </div>
+        </p>
     </div>
+    <div class="block">
+        {% if user.is_authenticated %}
+        <h2 class="title is-3 is-normal mt-5">Add a Thought</h2>
+    </div>
+    <div class="block" style="margin-right 300px">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button is-info is-fullwidh is-normal mt-5" type="submit">Share your thought</button>
+        </form>
+        {% else %}
+        {% endif %}
+    </div>
+</div>
 </div>
 </div>
 {% endblock content %}
