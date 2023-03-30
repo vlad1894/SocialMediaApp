@@ -22,26 +22,7 @@ class UserExtendCreateView(CreateView):
     template_name = 'userextend/create_user.html'
     model = User
     form_class = UserExtendForm
-    # success_url = reverse_lazy('dashboard')
 
-
-    # if form valid:
-    # bla bla
-    # redirect('template')
-
-    # @login_required
-    # def profile(request):
-    # if request.method == 'POST':
-    #     u_form = UserUpdateForm(request.POST, instance=request.user)
-    #     p_form = ProfileUpdateForm(request.POST,
-    #                                request.FILES,
-    #                                instance=request.user.profile)
-    #     if u_form.is_valid() and p_form.is_valid():
-    #         u_form.save()
-    #         p_form.save()
-    #         messages.success(request, f'Your account has been updated!')
-    #         # This is to prevent the user from resubmitting the form
-    #         return redirect('profile')
 
 
 

@@ -32,6 +32,7 @@ class Thought(models.Model):
         User, related_name="thoughts", on_delete=models.DO_NOTHING)
     body = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
         return (
@@ -40,5 +41,6 @@ class Thought(models.Model):
             f"{self.body[:30]}... "
         )
 
-
+    class Meta:
+        ordering = ['-created_at']
 # Create your models here.

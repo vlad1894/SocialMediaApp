@@ -53,6 +53,12 @@ def like_view(request, pk):
     return HttpResponseRedirect(reverse('dashboard', args=[str(pk)]))
 
 
+def dislike_view(request, pk):
+    post = get_object_or_404(Thought, id=request.POST.get('user'))
+    post.dislikes.add(request.user)
+    return HttpResponseRedirect(reverse('dashboard', args=[str(pk)]))
+
+
 
 
 # Create your views here.

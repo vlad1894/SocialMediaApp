@@ -5,7 +5,23 @@
     {% for thoughts in followed.user.thoughts.all %}
     <div class="box">
         {{ thoughts.body }}
-        <span class="is-small has-text-grey-light">({{ thoughts.created_at }} by {{ thoughts.user.username }})</span>
+        <span class="is-small has-text-grey-light">({{ thoughts.created_at }} by {{ thoughts.user.username }})
+            <div class="field is-grouped">
+                <div class="control">
+                    <form action='{% url "like_post" thoughts.pk %}'>
+                        {% csrf_token %}
+                        <button class="button is-info  is-outlined is-small">Like</button>
+                </form>    
+                </div>
+                <div class="control">
+                    <form action='{% url "dislike_post" thoughts.pk %}'>
+                        {% csrf_token %}
+                        <button class="button is-info  is-outlined is-small">Dislike</button>
+                </form>    
+                </div>
+            </div>
+        </span>
+        
     </div>
     {% endfor %}
     {% endfor %}
