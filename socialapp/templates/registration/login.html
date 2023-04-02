@@ -12,5 +12,10 @@
             <button class="button is-info is-fullwidh is-normal mt-5" type="submit">Login</button>
             </form>
         </div>
+        <div class="control">
+            <form action='{% url "create_user" %}'>
+                <button class="button is-info  is-outlined is-large">Sign-Up</button>
+            </form>
+        </div>
     </div>
 {% endblock content %}

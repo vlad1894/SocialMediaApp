@@ -28,8 +28,8 @@ def create_profile(sender, instance, created, **kwargs):
 
 
 class Thought(models.Model):
-    user = models.ForeignKey(
-        User, related_name="thoughts", on_delete=models.DO_NOTHING)
+    profile = models.ForeignKey(
+        Profile, related_name="thoughts", on_delete=models.DO_NOTHING)
     body = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -44,3 +44,8 @@ class Thought(models.Model):
     class Meta:
         ordering = ['-created_at']
 # Create your models here.
+
+
+# class Like(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     item = models.ForeignKey(Thought, on_delete=models.CASCADE)

@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django = "*"
 djlint = "*"
+django-likes = "*"
 
 [dev-packages]
 
