@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bd06ca6e73c3b8aa93ef1f4d9482555515ccefb1d45fab9c074e240ecc3ad5ab"
+            "sha256": "bb75db7e6fef5227ff227c6afff466709fdb8b8cb57861fe57b431cf05b2295e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -48,11 +48,40 @@
         },
         "django": {
             "hashes": [
-                "sha256:44f714b81c5f190d9d2ddad01a532fe502fa01c4cb8faf1d081f4264ed15dcd8",
-                "sha256:f2f431e75adc40039ace496ad3b9f17227022e8b11566f4b363da44c7e44761e"
+                "sha256:ad33ed68db9398f5dfb33282704925bce044bef4261cd4fb59e4e7f9ae505a78",
+                "sha256:c36e2ab12824e2ac36afa8b2515a70c53c7742f0d6eaefa7311ec379558db997"
             ],
             "index": "pypi",
-            "version": "==4.1.7"
+            "version": "==4.2"
+        },
+        "django-etc": {
+            "hashes": [
+                "sha256:61aee75a97ef868830260de86f2a69896992776c325624c46827c831101cbd9f",
+                "sha256:fa7dbcdba5d0dd3b42eac54463fe24a9e1202a1492ecbf50ed0bc1555074af8f"
+            ],
+            "version": "==1.4.0"
+        },
+        "django-likes": {
+            "hashes": [
+                "sha256:7342826298f3a5fbcc12892c3f539edc8d065c59dfa0d7c65d9806244e88f408"
+            ],
+            "index": "pypi",
+            "version": "==2.0.1"
+        },
+        "django-secretballot": {
+            "hashes": [
+                "sha256:5c1d6ebc3078514ada31fba32ed03a790df93911e436986dca53b607ce544aac",
+                "sha256:932a2d7cbbf6b4c059f093a885ea04e9daa2cc8c1f2f02ab9b5ccd19cb006463"
+            ],
+            "version": "==2.0.0"
+        },
+        "djangorestframework": {
+            "hashes": [
+                "sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8",
+                "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"
+            ],
+            "index": "pypi",
+            "version": "==3.14.0"
         },
         "djlint": {
             "hashes": [
@@ -98,6 +127,13 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==0.11.1"
+        },
+        "pytz": {
+            "hashes": [
+                "sha256:1d8ce29db189191fb55338ee6d0387d82ab59f3d00eac103412d64e0ebd0c588",
+                "sha256:a151b3abb88eda1d4e34a9814df37de2a80e301e68ba0fd856fb9b46bfbbbffb"
+            ],
+            "version": "==2023.3"
         },
         "pyyaml": {
             "hashes": [
