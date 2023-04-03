@@ -32,7 +32,7 @@ class Thought(models.Model):
         Profile, related_name="thoughts", on_delete=models.DO_NOTHING)
     body = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = Profile    
+    user = User    
 
     def __str__(self):
         return (

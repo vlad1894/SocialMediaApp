@@ -30,6 +30,9 @@ def dashboard(request):
     # form=ThoughtForm()
     # return render(request, 'socialapp/dashboard.html', {"form": form})
 
+
+
+
 @login_required
 def thought_edit(request, thought_id):
     thought = get_object_or_404(Thought, pk=thought_id)

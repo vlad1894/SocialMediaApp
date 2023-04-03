@@ -1,16 +1,20 @@
 {% extends "index.html" %}
 {% block content %}
+{% if user.is_authenticated %}
 <div class="column">
     {% for thought in thoughts %}
     <div class="box">
         {{ thought.body }}
         <span class="is-small has-text-grey-light">({{ thought.created_at }} by {{ thought.profile.user.username }})</span>
-        <form action='{% url "thought_edit" %}'>
+        <form action='{% url "login" %}'>
             <button class="button is-info is-outlined is-small">Delete</button>
         </form>
     </div>
     {% endfor %}
 </div>
+{% else %}
+<a href="{% url '/' %} "></a>
+{% endif %}
 {% if user.is_authenticated %}
 {% else %}
 <div class="field is-grouped" style="margin-left: 520px;
@@ -66,7 +70,7 @@ transform: translateY(50%)">
         {% if user.is_authenticated %}
         <h2 class="title is-3 is-normal mt-5">Add a Thought</h2>
     </div>
-    <div class="block" style="margin-right 300px">
+    <div class="block" style="margin-right 300px;">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
