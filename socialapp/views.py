@@ -30,23 +30,23 @@ def dashboard(request):
     # form=ThoughtForm()
     # return render(request, 'socialapp/dashboard.html', {"form": form})
 
-# @login_required
-# def thought_edit(request, thought_id):
-#     thought = get_object_or_404(Thought, pk=thought_id)
-#     profile = get_object_or_404(Profile, user=request.user)
-#     if thought.profile != profile:
-#         raise "Not mine!!!"
-#     if request.method == "POST":
-#         form = ThoughtForm(request.POST or None)
-#         if form.is_valid():
-#             thoughts = form.save(commit=False)
-#             thoughts.profile = profile
-#             thoughts.save()
-#             return redirect("socialapp:dashboard")
-#     elif request.method == "DELETE":
-#         thought.delete()
-#         return redirect("socialapp:dashboard")
-#     return redirect("socialapp:dashboard")
+@login_required
+def thought_edit(request, thought_id):
+    thought = get_object_or_404(Thought, pk=thought_id)
+    profile = get_object_or_404(Profile, user=request.user)
+    if thought.profile != profile:
+        raise "Not mine!!!"
+    if request.method == "POST":
+        form = ThoughtForm(request.POST or None)
+        if form.is_valid():
+            thoughts = form.save(commit=False)
+            thoughts.profile = profile
+            thoughts.save()
+            return redirect("socialapp:dashboard")
+    elif request.method == "DELETE":
+        thought.delete()
+        return redirect("socialapp:dashboard")
+    return redirect("socialapp:dashboard")
 
 def list_of_profiles(request):
     profiles = Profile.objects.exclude(user=request.user)

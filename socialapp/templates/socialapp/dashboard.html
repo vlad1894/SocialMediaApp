@@ -5,6 +5,9 @@
     <div class="box">
         {{ thought.body }}
         <span class="is-small has-text-grey-light">({{ thought.created_at }} by {{ thought.profile.user.username }})</span>
+        <form action='{% url "#" %}'>
+            <button class="button is-info is-outlined is-large">Delete</button>
+        </form>
     </div>
     {% endfor %}
 </div>
