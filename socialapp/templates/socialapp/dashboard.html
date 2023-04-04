@@ -1,20 +1,23 @@
 {% extends "index.html" %}
 {% block content %}
-{% if user.is_authenticated %}
 <div class="column">
     {% for thought in thoughts %}
     <div class="box">
         {{ thought.body }}
         <span class="is-small has-text-grey-light">({{ thought.created_at }} by {{ thought.profile.user.username }})</span>
-        <form action='{% url "login" %}'>
-            <button class="button is-info is-outlined is-small">Delete</button>
-        </form>
+        <div class="field is-grouped">
+            <form action='{% url "socialapp:delete_thought" thought.id%}' method="POST">
+                {% csrf_token %}
+                <button class="button is-info is-outlined is-small">Delete</button>
+            </form>
+            <form action='{% url "socialapp:edit_thought" thought.id%}' method="POST">
+                {% csrf_token %}
+                <button class="button is-info is-outlined is-small">Edit</button>
+            </form>
+        </div>
     </div>
     {% endfor %}
 </div>
-{% else %}
-<a href="{% url '/' %} "></a>
-{% endif %}
 {% if user.is_authenticated %}
 {% else %}
 <div class="field is-grouped" style="margin-left: 520px;
@@ -22,14 +25,7 @@ position: absolute;
 top: 50%;
 -ms-transform: translateY(50%);
 transform: translateY(50%)">
-    
-    <div class="control">
-        <form action='{% url "login" %}'>
-            <button class="button is-info is-outlined is-large">Login</button>
-        </form>
-    </div>
 </div>
-
 {% endif %}
 <div class="block">
     {% if user.is_authenticated %}
@@ -70,7 +66,7 @@ transform: translateY(50%)">
         {% if user.is_authenticated %}
         <h2 class="title is-3 is-normal mt-5">Add a Thought</h2>
     </div>
-    <div class="block" style="margin-right 300px;">
+    <div class="block" style="margin-right: 30px;">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}

@@ -17,3 +17,6 @@ class ThoughtForm(forms.ModelForm):
     class Meta:
         model = Thought
         exclude = ("profile", )
+
+
+
