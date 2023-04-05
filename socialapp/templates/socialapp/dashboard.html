@@ -5,16 +5,18 @@
     <div class="box">
         {{ thought.body }}
         <span class="is-small has-text-grey-light">({{ thought.created_at }} by {{ thought.profile.user.username }})</span>
+        {% if thought.profile == profile %}
         <div class="field is-grouped">
             <form action='{% url "socialapp:delete_thought" thought.id%}' method="POST">
                 {% csrf_token %}
                 <button class="button is-info is-outlined is-small">Delete</button>
             </form>
-            <form action='{% url "socialapp:edit_thought" thought.id%}' method="POST">
+            <form action='{% url "socialapp:edit_thought" thought.id%}' method="EDIT">
                 {% csrf_token %}
                 <button class="button is-info is-outlined is-small">Edit</button>
             </form>
         </div>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

@@ -17,7 +17,7 @@
         </form>
     </div>
     <div class="content">
-        {% for thought in profile.user.thoughts %}
+        {% for thoughts in profile.thoughts.all %}
         <div class="box">
             {{ thoughts.body }}
             <span class="is-small has-text-grey-light">({{ thoughts.created_at }})</span>

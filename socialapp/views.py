@@ -27,8 +27,6 @@ def dashboard(request):
     return render(request, 'socialapp/dashboard.html', {"form": form, "thoughts": list(followed_thoughts), "profile": profile})
 
 
-    # form=ThoughtForm()
-    # return render(request, 'socialapp/dashboard.html', {"form": form})
 
 @login_required
 def delete_thought(request, thought_id):
@@ -91,30 +89,6 @@ class DeletePost(DeleteView):
     model = Thought
     template_name = "socialapp/post_delete.html"
     success_url = reverse_lazy('dashboard')
-
-
-
-
-
-# def like_view(request, pk):
-#     post = get_object_or_404(Thought, id=request.POST.get('user'))
-#     post.likes.add(request.user)
-#     return HttpResponseRedirect(reverse('dashboard', args=[str(pk)]))
-
-
-# def dislike_view(request, pk):
-#     post = get_object_or_404(Thought, id=request.POST.get('user'))
-#     post.dislikes.add(request.user)
-#     return HttpResponseRedirect(reverse('dashboard', args=[str(pk)]))
-
-
-# def like_item(request):
-#     user=request.user
-#     item_id = request.POST.get('item_id')
-#     item = Thought.objects.get(id=item_id)
-#     likes = Like.objects.filter(user=user, item=item)
-#     if not likes.exists():
-#         Like.objects.create(user=user, item=item)
 
 
 # Create your views here.
