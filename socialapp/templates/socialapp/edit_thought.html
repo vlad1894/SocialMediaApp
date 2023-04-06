@@ -1,22 +1,36 @@
 {% extends 'index.html' %}
-
 {% block content %}
+<div class = "parent-container">
 <div class="container">
     <h1 class="title">Edit Post</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <div class="field">
-            <label class="label">Thought</label>
-            <div class="control">
-                <input class="input" type="text" name="title" value="{{ thought.title }}">
-            </div>
+        
         </div>
-        <div class="field">
+        <div class="button-container">
             <div class="control">
-                <button class="button is-primary" type="submit">Save Changes</button>
+                <button class="button is-info" type="submit">Save Changes</button>
             </div>
         </div>
     </form>
 </div>
+
+<style>
+    .parent-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 5%; 
+}
+
+.container {
+  margin-bottom: 2rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+    </style>
 {% endblock %}
