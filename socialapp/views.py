@@ -46,13 +46,15 @@ def edit_thought(request, thought_id):
     if thought.profile != profile:
         raise Exception("Not mine!!!")
     if request.method == "POST":
-        form = ThoughtForm(request.POST or None)
+        form = ThoughtForm(request.POST, instance = thought)
         if form.is_valid():
-            thoughts = form.save(commit=False)
+            thoughts = form.save(commit=True)
             thoughts.profile = profile
             thoughts.save()
             return redirect("socialapp:dashboard")
-    return redirect("socialapp:dashboard")
+    else:
+        form = ThoughtForm(instance=thought)
+    return redirect("edit_thought", pk = thought.pk )
 
 def list_of_profiles(request):
     profiles = Profile.objects.exclude(user=request.user)
@@ -76,19 +78,19 @@ def profile(request, pk):
         current_user_profile.save()
     return render(request, 'socialapp/profile.html', {'profile': profile})
 
-class EditPost(UpdateView):
-    model = Thought
-    fields = ['body']
-    template_name = "socialapp/post_edit.html"
+# class EditPost(UpdateView):
+#     model = Thought
+#     fields = ['body']
+#     template_name = "socialapp/post_edit.html"
 
-    def get_success_url(self):
-        pk = self.kwargs['pk']
-        return reverse_lazy("dashbaord", kwargs={'pk': pk})
+#     def get_success_url(self):
+#         pk = self.kwargs['pk']
+#         return reverse_lazy("dashbaord", kwargs={'pk': pk})
     
-class DeletePost(DeleteView):
-    model = Thought
-    template_name = "socialapp/post_delete.html"
-    success_url = reverse_lazy('dashboard')
+# class DeletePost(DeleteView):
+#     model = Thought
+#     template_name = "socialapp/post_delete.html"
+#     success_url = reverse_lazy('dashboard')
 
 
 # Create your views here.

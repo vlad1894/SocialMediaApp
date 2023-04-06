@@ -14,6 +14,7 @@ Login
         </form>
     </div>
     <div class="control">
+        {% csrf_token %}
         <form action='{% url "create_user" %}'>
             <button class="button is-info is-round is-normal mt-5" type="submit">Sign-Up</button>
         </form>
