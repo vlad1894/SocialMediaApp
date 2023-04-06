@@ -53,8 +53,9 @@ def edit_thought(request, thought_id):
             thoughts.save()
             return redirect("socialapp:dashboard")
     else:
+        print(f"thought: {thought.unique_error_message} not valid")
         form = ThoughtForm(instance=thought)
-    return redirect("edit_thought", pk = thought.pk )
+    return render(request, "socialapp/edit_thought.html", {"form": form})
 
 def list_of_profiles(request):
     profiles = Profile.objects.exclude(user=request.user)
