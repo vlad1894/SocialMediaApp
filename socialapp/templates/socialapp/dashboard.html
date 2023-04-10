@@ -46,7 +46,7 @@ transform: translateY(50%)">
         <div class="block">
             {% if user.is_authenticated %}
             <a href="{% url 'socialapp:list_of_profiles' %} ">
-                <button class="button is-info is-outlined is-fullwidth is-normal ">Following</button>
+                <button class="button is-info is-outlined is-fullwidth is-normal ">All Profiles</button>
             </a>
             {% else %}
             <a href="{% url 'login' %}"></a>

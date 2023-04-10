@@ -7,18 +7,25 @@
     
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+          
+    <style>
+      body {
+        background-color: #f5f5f5;
+      }
+    </style>
+    
     <title>Thoughts</title>
 </head>
 <body>
-    <a href="{% url 'socialapp:dashboard' %}"
-    <section class="hero is-small is-info mb-4">
-        <div class="hero-body">
-            <h1 class="title is-1">Thoughts</h1>
-            <p class="subtitle is-4">
-                Your own canvas for thoughts
-            </p>
-        </div>
-    </section>
+    <a href="{% url 'socialapp:dashboard' %}">
+        <section class="hero is-small is-info is-light mb-4">
+            <div class="hero-body">
+                <h1 class="title is-1">Thoughts</h1>
+                <p class="subtitle is-4">
+                    Your own canvas for thoughts
+                </p>
+            </div>
+        </section>
     </a>
 
     <div class="container-fluid">
@@ -29,5 +36,6 @@
             {% endblock content %}
 
         </div>
-    </body>
+    </div>
+</body>
 </html>

@@ -1,16 +1,26 @@
 {% extends "index.html" %}
+
 {% block title %}
     Create User
 {% endblock title %}
+
 {% block content %}
-    <div class="column">
-        <div class="block">
-            <h3 class="title is-3">Create a new user</h3>
-            <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="button is-info is-normal mt-5" type="submit">Save</button>
-            </form>
+    <section class="hero is-centered" style: style="margin-left: 250px;">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-full">
+                        <div class="box">
+                            <h3 class="title is-3 has-text-centered">Create a new user</h3>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button class="button is-info is-fullwidth mt-5" type="submit">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 {% endblock content %}

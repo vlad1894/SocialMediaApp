@@ -3,6 +3,7 @@
 <div class="column">
     <div class="block">
         <h1 class="title is-1">{{ profile.user.username|upper }}'s Thoughts</h1>
+        {% if not request.user.is_authenticated or profile.user != request.user %}
         <form method="post">
             {% csrf_token %}
             <div class="buttons has-addons">
@@ -15,6 +16,7 @@
                 {% endif %}
             </div>
         </form>
+        {% endif %}
     </div>
     <div class="content">
         {% for thoughts in profile.thoughts.all %}

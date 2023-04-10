@@ -7,6 +7,9 @@ from django.urls import reverse_lazy
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.urls import reverse
 
 @login_required
 def dashboard(request):
@@ -79,19 +82,30 @@ def profile(request, pk):
         current_user_profile.save()
     return render(request, 'socialapp/profile.html', {'profile': profile})
 
-# class EditPost(UpdateView):
-#     model = Thought
-#     fields = ['body']
-#     template_name = "socialapp/post_edit.html"
+# def profile(request, pk):
+#     if not hasattr(request.user, 'profile'):
+#         missing_profile = Profile(user=request.user)
+#         missing_profile.save()
 
-#     def get_success_url(self):
-#         pk = self.kwargs['pk']
-#         return reverse_lazy("dashbaord", kwargs={'pk': pk})
-    
-# class DeletePost(DeleteView):
-#     model = Thought
-#     template_name = "socialapp/post_delete.html"
-#     success_url = reverse_lazy('dashboard')
+#     profile = Profile.objects.get(pk=pk)
 
+#     if request.method == "POST":
+        
+#         if 'photo' in request.FILES:
+#             photo = request.FILES['photo']
+#             fs = FileSystemStorage(location=settings.MEDIA_ROOT)
+#             filename = fs.save(photo.name, photo)
+#             profile.photo = filename
+#             profile.save()
+#             return redirect('socialapp:profile', pk=pk)
 
-# Create your views here.
+#         current_user_profile = request.user.profile
+#         data = request.POST
+#         action = data.get("follow")
+#         if action == "follow":
+#             current_user_profile.follows.add(profile)
+#         elif action == "unfollow":
+#             current_user_profile.follows.remove(profile)
+#         current_user_profile.save()
+
+#     return render(request, 'socialapp/profile.html', {'profile': profile})
