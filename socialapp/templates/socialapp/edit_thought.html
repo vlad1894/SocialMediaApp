@@ -2,7 +2,7 @@
 {% block content %}
 <div class = "parent-container">
 <div class="container">
-    <h1 class="title">Edit Post</h1>
+    <h1 class="title">Edit Thought</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -21,7 +21,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 5%; 
+  margin-left: 3%;
+  margin-top: 3%; 
 }
 
 .container {
